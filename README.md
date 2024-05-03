@@ -1,28 +1,28 @@
-Context and Definitions
+<h1>Context and Definitions</h1>
 You are in charge of developing a new cool JavaScript library that provides functionality similar to that of Underscore.js.
 
 You have started by adding a new list data type to your library. You came up with a design of a data structure that represents an algebraic data type as a pair of elements:
 
-class Cons:
-  def __init__(self, head, tail):
-    self.head = head
-    self.tail = tail
-You are pretty smart, because using this new data type, we can easily build a list of elements. For instance, a list of numbers:
+>class Cons:
+  >>def __init__(self, head, tail):
+    >>>self.head = head
+    >>>self.tail = tail  
 
-numbers = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, None)))))
+You are pretty smart, because using this new data type, we can easily build a list of elements. For instance, a list of numbers:
+numbers = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, None)))))  
 In a code review with your boss, you explained him how every cons cell contains a "value" in its head, and in its tail it contains either another cons cell or null. We know we have reached the end of the data structure when the tail is null.
 
 So, your boss is pretty excited about this new data structure and wants to know if you will be able to build some more functionality around it. In a demo you did this week for the rest of your team, in order to illustrate how this works, you showed them a method to transform a list of items of your list data type into a JavaScript array:
 
-  # added to the class implementation:
-  def to_array(self):
-    tail = self.tail
-    new_tail = (tail.to_array() if tail is not None else [])
-    return [self.head] + new_tail
+added to the class implementation:
+  >def to_array(self):  
+  >>tail = self.tail  
+  >>new_tail = (tail.to_array() if tail is not None else [])  
+  >>return [self.head] + new_tail  
 And they were amazed when you simply did this:
 
-print(numbers.to_array())  # yields [1,2,3,4,5]
-The New Requirements
+>print(numbers.to_array())  # yields [1,2,3,4,5]
+<h1>The New Requirements</h1>
 Now, the team is convinced that this is the way to go and they would like to build the library around this cool new data type, but they want you to provide a few more features for them so that they can start using this type in solving some real world problems.
 
 You have been reading about a technique called applicative programming which basically consists in applying a function to every element in a list. So, you gave it some thought and you have decided to start adding features like filter, map and reduce. Basically you want to provide equivalent functionality to that of JavaScript arrays and in the future even more.
@@ -34,14 +34,15 @@ map : create a new list in which every element is the result of applying a funct
 fromArray: a convenient complementary method that creates a list out of a JavaScript array.
 For this Kata, the definition of Cons and the prototypal/class method toArray/to_array/into_vec are already loaded in your environment.
 
-Examples of Usage
-numbers = Cons.from_array([1,2,3,4,5])
-numbers.filter(lambda x: x % 2 == 0).to_array()  # yields [2,4]
-numbers.map(lambda x: x * x).to_array()  # yields [1,4,9,16,25]
+<h1>Examples of Usage</h1>  
 
-digits = Cons.from_array(["1","2","3","4","5"])
-integers = digits.map(int) \
-                 .filter(lambda n: n > 3) \
+>numbers = Cons.from_array([1,2,3,4,5])  
+>numbers.filter(lambda x: x % 2 == 0).to_array()  # yields [2,4]  
+>numbers.map(lambda x: x * x).to_array()  # yields [1,4,9,16,25]  
+
+>digits = Cons.from_array(["1","2","3","4","5"])
+>integers = digits.map(int) \ 
+                 .filter(lambda n: n > 3) \  
                  .to_array()  # yields [4,5]
 In other words:
 
